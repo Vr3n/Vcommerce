@@ -1,2 +1,3 @@
-# django_react_cart_system
-Cart System for django and react
+# VCommerce 
+
+Ecommerce system created with Django and react.
