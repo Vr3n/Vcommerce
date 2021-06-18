@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
@@ -12,6 +13,9 @@ class Category(models.Model):
     class Meta:
         ordering = ["name"]
         verbose_name_plural = "Categories"
+
+    def get_absolute_url(self):
+        return reverse('category', kwargs={'pk': self.pk})
 
     def __str__(self) -> str:
         return f"{self.name}"
@@ -30,6 +34,9 @@ class Product(models.Model):
 
     class Meta:
         ordering = ['-created_on']
+
+    def get_absolute_url(self):
+        return reverse('product', kwargs={'pk': self.pk})
 
     def __str__(self) -> str:
         return f"{self.name} - {self.price}"
