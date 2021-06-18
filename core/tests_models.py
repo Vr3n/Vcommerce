@@ -11,14 +11,33 @@ class CategoryTestCase(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.category = Category.objects.create(name="test category")
+        cls.category_2 = Category(name="Test 2 Category")
+
+    def test_model_can_create_a_category(self):
+        """
+        Test that Category model can create a Category.
+        """
+        old_count = Category.objects.count()
+        self.category_2.save()
+        new_count = Category.objects.count()
+        self.assertGreater(new_count, old_count)
 
     def test_string_representation(self):
+        """
+        Testing the String representation of model.
+        """
         self.assertEqual(str(self.category), self.category.name)
 
     def test_created_properly(self):
+        """
+        Test for model data inserted properly
+        """
         self.assertEqual(self.category.name, "test category")
 
     def test_absolute_url(self):
+        """
+        Testing the get_absolute_url method of model.
+        """
         self.assertEqual(self.category.get_absolute_url(),
                          reverse('category', args=[self.category.id]))
 
@@ -40,19 +59,48 @@ class ProductTestCase(TestCase):
             description=data[0]['description'],
             image_url=data[0]['image'],
         )
+        cls.product_2 = Product(
+            name=data[3]['title'],
+            price=float(data[3]['price']),
+            description=data[3]['description'],
+            image_url=data[3]['image'],
+        )
+        cls.api_test_data = data[2:8]
+
+    def test_model_can_create_a_product(self):
+        """
+        Test that Product model can create a Product.
+        """
+
+        old_count = Product.objects.count()
+        self.product_2.save()
+        new_count = Product.objects.count()
+        self.assertGreater(new_count, old_count)
 
     def test_string_representation(self):
+        """
+        Testing the String representation of model.
+        """
         self.assertEqual(str(self.product),
                          f"{self.product.name} - {self.product.price}")
 
     def test_created_properly(self):
+        """
+        Test that Category model can create a Category.
+        """
         self.assertEqual(self.product.name, self.product_name)
 
     def test_category_added_properly(self):
+        """
+        Test for model data inserted properly
+        """
         self.product.category.add(self.category)
         self.assertEqual(self.product.category.first().name,
                          self.category.name)
 
     def test_absolute_url(self):
+        """
+        Testing the get_absolute_url method of model.
+        """
         self.assertEqual(self.product.get_absolute_url(),
                          reverse('product', args=[self.product.id]))
