@@ -81,6 +81,7 @@ class ProductTestCase(TestCase):
         """
         Testing the String representation of model.
         """
+
         self.assertEqual(str(self.product),
                          f"{self.product.name} - {self.product.price}")
 
@@ -88,12 +89,14 @@ class ProductTestCase(TestCase):
         """
         Test that Category model can create a Category.
         """
+
         self.assertEqual(self.product.name, self.product_name)
 
     def test_category_added_properly(self):
         """
         Test for model data inserted properly
         """
+
         self.product.category.add(self.category)
         self.assertEqual(self.product.category.first().name,
                          self.category.name)
@@ -102,5 +105,6 @@ class ProductTestCase(TestCase):
         """
         Testing the get_absolute_url method of model.
         """
+
         self.assertEqual(self.product.get_absolute_url(),
                          reverse('product_detail', args=[self.product.id]))
