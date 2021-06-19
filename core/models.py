@@ -15,7 +15,7 @@ class Category(models.Model):
         verbose_name_plural = "Categories"
 
     def get_absolute_url(self):
-        return reverse('category', kwargs={'pk': self.pk})
+        return reverse('category_detail', kwargs={'pk': self.pk})
 
     def __str__(self) -> str:
         return f"{self.name}"
@@ -36,7 +36,7 @@ class Product(models.Model):
         ordering = ['-created_on']
 
     def get_absolute_url(self):
-        return reverse('product', kwargs={'pk': self.pk})
+        return reverse('product_detail', kwargs={'pk': self.pk})
 
     def __str__(self) -> str:
         return f"{self.name} - {self.price}"

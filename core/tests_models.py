@@ -39,7 +39,7 @@ class CategoryTestCase(TestCase):
         Testing the get_absolute_url method of model.
         """
         self.assertEqual(self.category.get_absolute_url(),
-                         reverse('category', args=[self.category.id]))
+                         reverse('category_detail', args=[self.category.id]))
 
 
 class ProductTestCase(TestCase):
@@ -103,4 +103,4 @@ class ProductTestCase(TestCase):
         Testing the get_absolute_url method of model.
         """
         self.assertEqual(self.product.get_absolute_url(),
-                         reverse('product', args=[self.product.id]))
+                         reverse('product_detail', args=[self.product.id]))
