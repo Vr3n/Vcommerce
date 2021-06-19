@@ -27,3 +27,6 @@ def save_to_db(data):
         cat = Category.objects.create(name=category)
 
         product.category.add(cat)
+
+
+#abc
