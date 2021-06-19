@@ -6,7 +6,7 @@ from .models import Category, Product
 
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
     category = serializers.HyperlinkedRelatedField(
-        many=True, view_name='category', read_only=True)
+        many=True, view_name='category_detail', read_only=True)
     url = serializers.URLField(source='get_absolute_url', read_only=True)
 
     class Meta:
@@ -19,7 +19,6 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
             'image_url',
             'category',
         ]
-        depth = 1
 
 
 class CategorySerializer(serializers.HyperlinkedModelSerializer):

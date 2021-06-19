@@ -18,6 +18,23 @@ def product_detail_view(request, pk):
     return render(request, "detail.html", {'name': product.name, 'title': str(product.name)})
 
 
+class ProductDetailAPIView(generics.RetrieveAPIView):
+    """
+    Detail view for Product
+    """
+
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+class CategoryDetailAPIView(generics.RetrieveAPIView):
+    """
+    Detail view for Category
+    """
+
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+
 class ProductListView(generics.ListAPIView):
     """
     Defines the List behaviour of our rest api.
@@ -65,3 +82,11 @@ class CategoryCreateView(generics.CreateAPIView):
         """
 
         serializer.save()
+
+# class ProductUpdateView(generics.UpdateAPIView):
+#     """
+#     Defines the Update behaviour of our rest api.
+#     """
+
+#     queryset = Product.objects.
+#     serializer_class = CategorySerializer
