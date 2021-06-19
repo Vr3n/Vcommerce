@@ -34,7 +34,7 @@ jobs:
       - name: Coverage report
         run:
           coverage run manage.py test
-          coverage report
+          coverage report -m
 
       - name: Django Testing
         run:
