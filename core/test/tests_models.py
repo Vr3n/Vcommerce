@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
-from ..models import Product, Category, Cart
+from ..models import Product, Category
 import requests
 
 # Create your tests here.
@@ -108,29 +108,3 @@ class ProductTestCase(TestCase):
 
         self.assertEqual(self.product.get_absolute_url(),
                          reverse('product_detail', args=[self.product.id]))
-
-
-class CartTestCase(TestCase):
-
-    @classmethod
-    def setUpTestData(cls):
-        r = requests.get("https://fakestoreapi.com/products")
-        data = r.json()
-        for i in range(len(data)):
-            Product.objects.create(
-                name=data[i]['title'],
-                price=float(data[i]['price']),
-                description=data[i]['description'],
-                image_url=data[i]['image'],
-            )
-
-        products = Product.objects.all()[1:11]
-        cls.ten_products = Product.objects.all()[12:22]
-        Cart.product.add(products)
-
-    def test_add_products_to_cart(self):
-        old_cart_count = Cart.objects.count()
-        product = Product.objects.get(id=22)
-        Cart.product.add(product)
-        new_cart_count = Cart.objects.count()
-        self.assertGreater(new_cart_count, old_cart_count)
