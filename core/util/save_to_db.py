@@ -1,6 +1,7 @@
 import requests
 from ..models import Category, Product
 
+
 # r = requests.get('https://fakestoreapi.com/products')
 
 # data = r.json()
@@ -24,9 +25,10 @@ def save_to_db(data):
 
         category = p['category']
 
-        cat = Category.objects.create(name=category)
+        
+        cat = Category.objects.get_or_create(name=category)
 
-        product.category.add(cat)
+        product.category.add(cat[0].id)
 
 
-#abc
+# abc
