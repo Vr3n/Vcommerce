@@ -36,9 +36,11 @@ jobs:
           coverage run manage.py test
           && coverage report
 
-      - name: Django Testing
-        run: echo $SECRETS_FILE_CONTENT | base64 -d ? .env
+      - name: Setup Environments
+        run: echo $SECRETS_FILE_CONTENT | base64 -d > .env
         env:
           SECRETS_FILE_CONTENT: ${{ secrets.SECRETS_FILE_CONTENT }}
+
+      - name: Django Testing
         run:
           python3 manage.py test
