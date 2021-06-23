@@ -49,7 +49,7 @@ jobs:
       
       - name: Coverage report
         env:
-          SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+          DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
           DB_USER: ${{ secrets.POSTGRESQL_USER }}
           DB_PASSWORD: ${{ secrets.POSTGRESQL_PASSWORD }}
           DB_NAME: ${{ secrets.POSTGRESQL_DB_NAME }}
@@ -59,4 +59,11 @@ jobs:
           && coverage report
 
       - name: Django Testing
+        env:
+          DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+          DB_USER: ${{ secrets.POSTGRESQL_USER }}
+          DB_PASSWORD: ${{ secrets.POSTGRESQL_PASSWORD }}
+          DB_NAME: ${{ secrets.POSTGRESQL_DB_NAME }}
+          DB_HOST: ${{ secrets.POSTGRESQL_HOST }}
+          DB_ENGINE: ${{ secrets.DB_ENGINE }}
         run: python3 manage.py test
