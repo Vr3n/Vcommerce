@@ -54,6 +54,7 @@ jobs:
           POSTGRESQL_PASSWORD: ${{ secrets.POSTGRESQL_PASSWORD }}
           POSTGRESQL_DB_NAME: ${{ secrets.POSTGRESQL_DB_NAME }}
           POSTGRESQL_HOST: ${{ secrets.POSTGRESQL_HOST }}
+          POSTGRESQL_PORT: ${{ secrets.POSTGRESQL_PORT }}
           DB_ENGINE: ${{ secrets.DB_ENGINE }}
         run: coverage run manage.py test
           && coverage report
@@ -65,5 +66,6 @@ jobs:
           POSTGRESQL_PASSWORD: ${{ secrets.POSTGRESQL_PASSWORD }}
           POSTGRESQL_DB_NAME: ${{ secrets.POSTGRESQL_DB_NAME }}
           POSTGRESQL_HOST: ${{ secrets.POSTGRESQL_HOST }}
+          POSTGRESQL_PORT: ${{ secrets.POSTGRESQL_PORT }}
           DB_ENGINE: ${{ secrets.DB_ENGINE }}
         run: python3 manage.py test
