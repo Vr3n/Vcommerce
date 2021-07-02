@@ -58,7 +58,7 @@ jobs:
             POSTGRESQL_HOST: "localhost"
             POSTGRESQL_PORT: 5432
             DB_ENGINE: ${{ secrets.DB_ENGINE }}
-        run: python3 manage.py makemigrations && python3 manage.py migrate
+        run: python3 manage.py makemigrations core user && python3 manage.py migrate
   
       - name: Coverage report
         env:
