@@ -50,6 +50,14 @@ jobs:
           flake8
           
       - name: Migrations
+        env:
+            DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+            POSTGRESQL_USER: postgres
+            POSTGRESQL_PASSWORD: postgres
+            POSTGRESQL_DB_NAME: postgres
+            POSTGRESQL_HOST: "localhost"
+            POSTGRESQL_PORT: 5432
+            DB_ENGINE: ${{ secrets.DB_ENGINE }}
         run: python3 manage.py makemigrations && python3 manage.py migrate
   
       - name: Coverage report
