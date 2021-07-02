@@ -1,4 +1,4 @@
-name: Django Tests
+name: Django Application
 
 ## Define activity which triggers the CI.
 on:
@@ -16,6 +16,20 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:10.8
+        env:
+          POSTGRES_USER: ${{ secrets.POSTGRESQL_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRESQL_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.POSTGRESQL_DB_NAME }}
+        
+        ports:
+          - 5432:5432
+          
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+        
 
     services:
       postgres:
@@ -44,18 +58,28 @@ jobs:
         run: python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Setup Environments
-        run: echo $SECRETS_FILE_CONTENT | base64 -d > ../.env
-        env:
-          SECRETS_FILE_CONTENT: ${{ secrets.SECRETS_FILE_CONTENT }}
-
       - name: Link with flake8
         run: pip install flake8
           flake8
-
       - name: Coverage report
+        env:
+          DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+          POSTGRESQL_USER: ${{ secrets.POSTGRESQL_USER }}
+          POSTGRESQL_PASSWORD: ${{ secrets.POSTGRESQL_PASSWORD }}
+          POSTGRESQL_DB_NAME: ${{ secrets.POSTGRESQL_DB_NAME }}
+          POSTGRESQL_HOST: ${{ secrets.POSTGRESQL_HOST }}
+          POSTGRESQL_PORT: ${{ secrets.POSTGRESQL_PORT }}
+          DB_ENGINE: ${{ secrets.DB_ENGINE }}
         run: coverage run manage.py test
           && coverage report
 
       - name: Django Testing
+        env:
+          DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+          POSTGRESQL_USER: ${{ secrets.POSTGRESQL_USER }}
+          POSTGRESQL_PASSWORD: ${{ secrets.POSTGRESQL_PASSWORD }}
+          POSTGRESQL_DB_NAME: ${{ secrets.POSTGRESQL_DB_NAME }}
+          POSTGRESQL_HOST: ${{ secrets.POSTGRESQL_HOST }}
+          POSTGRESQL_PORT: ${{ secrets.POSTGRESQL_PORT }}
+          DB_ENGINE: ${{ secrets.DB_ENGINE }}
         run: python3 manage.py test
