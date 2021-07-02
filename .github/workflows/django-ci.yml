@@ -52,11 +52,11 @@ jobs:
       - name: Coverage report
         env:
           DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-          POSTGRESQL_USER: ${{ secrets.POSTGRESQL_USER }}
-          POSTGRESQL_PASSWORD: ${{ secrets.POSTGRESQL_PASSWORD }}
-          POSTGRESQL_DB_NAME: ${{ secrets.POSTGRESQL_DB_NAME }}
-          POSTGRESQL_HOST: ${{ secrets.POSTGRESQL_HOST }}
-          POSTGRESQL_PORT: ${{ secrets.POSTGRESQL_PORT }}
+          POSTGRESQL_USER: postgres
+          POSTGRESQL_PASSWORD: postgres
+          POSTGRESQL_DB_NAME: postgres
+          POSTGRESQL_HOST: db
+          POSTGRESQL_PORT: 5432
           DB_ENGINE: ${{ secrets.DB_ENGINE }}
         run: coverage run manage.py test
           && coverage report
@@ -64,10 +64,10 @@ jobs:
       - name: Django Testing
         env:
           DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-          POSTGRESQL_USER: ${{ secrets.POSTGRESQL_USER }}
-          POSTGRESQL_PASSWORD: ${{ secrets.POSTGRESQL_PASSWORD }}
-          POSTGRESQL_DB_NAME: ${{ secrets.POSTGRESQL_DB_NAME }}
-          POSTGRESQL_HOST: ${{ secrets.POSTGRESQL_HOST }}
-          POSTGRESQL_PORT: ${{ secrets.POSTGRESQL_PORT }}
+          POSTGRESQL_USER: postgres
+          POSTGRESQL_PASSWORD: postgres
+          POSTGRESQL_DB_NAME: postgres
+          POSTGRESQL_HOST: db
+          POSTGRESQL_PORT: 5432
           DB_ENGINE: ${{ secrets.DB_ENGINE }}
         run: python3 manage.py test
