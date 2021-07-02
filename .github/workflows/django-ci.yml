@@ -55,7 +55,7 @@ jobs:
           POSTGRESQL_USER: postgres
           POSTGRESQL_PASSWORD: postgres
           POSTGRESQL_DB_NAME: postgres
-          POSTGRESQL_HOST: db
+          POSTGRESQL_HOST: "localhost"
           POSTGRESQL_PORT: 5432
           DB_ENGINE: ${{ secrets.DB_ENGINE }}
         run: coverage run manage.py test
@@ -67,7 +67,7 @@ jobs:
           POSTGRESQL_USER: postgres
           POSTGRESQL_PASSWORD: postgres
           POSTGRESQL_DB_NAME: postgres
-          POSTGRESQL_HOST: db
+          POSTGRESQL_HOST: "localhost"
           POSTGRESQL_PORT: 5432
           DB_ENGINE: ${{ secrets.DB_ENGINE }}
         run: python3 manage.py test
