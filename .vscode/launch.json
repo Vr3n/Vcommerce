@@ -5,6 +5,13 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "command": "yarn react-scripts start",
+      "cwd": "${workspaceFolder}/frontend_react",
+      "name": "React Start",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
       "name": "Python: Django",
       "type": "python",
       "request": "launch",
