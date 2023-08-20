@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "mptt",
     "vcommerce.dashboard",
     "inventory",
+    "demo",  # remove this in production.
 ]
 
 MIDDLEWARE = [
