@@ -5,7 +5,9 @@ from selenium.webdriver.common.by import By
 
 
 @pytest.mark.selenium
-def test_dashboard_admin_login(live_server, django_db_fixture_setup, edge_browser_instance):
+def test_dashboard_admin_login(live_server,
+                               django_db_fixture_setup,
+                               edge_browser_instance):
 
     i = User.objects.get(id=1)
     print(i.password)
